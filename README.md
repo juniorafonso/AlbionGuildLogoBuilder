@@ -1,25 +1,55 @@
 # Albion Online Guild Logo Builder
 
-A web-based tool for creating and customizing Albion Online guild logos using the official render API.
+[![GitHub Pages](https://img.shields.io/badge/demo-online-blue?logo=github)](https://juniorafonso.github.io/AlbionGuildLogoBuilder/index.html)
+[![GitHub Repo](https://img.shields.io/badge/github-repo-black?logo=github)](https://github.com/juniorafonso/AlbionGuildLogoBuilder)
 
-![Albion Guild Logo Builder](preview.png)
+A web tool to create and customize Albion Online guild logos using the official rendering API.
 
-## Features
+## 🔗 Live Demo
 
-- Create guild logos with all available symbols and patterns
-- Customize symbol positioning and scaling
-- Choose from all in-game color options
-- Preview logos in real-time
-- Support for all frame types (guild ranks and alliance frames)
-- Generate shareable URLs for your logo designs
+- **Online page:** [https://juniorafonso.github.io/AlbionGuildLogoBuilder/index.html](https://juniorafonso.github.io/AlbionGuildLogoBuilder/index.html)
+- **Repository:** [https://github.com/juniorafonso/AlbionGuildLogoBuilder](https://github.com/juniorafonso/AlbionGuildLogoBuilder)
 
-## Getting Started
+## ✨ Features
 
-### Prerequisites
+- Browse and select all available guild symbols
+- Customize backgrounds, colors, and frames
+- Adjust symbol scale and position
+- Real-time preview
+- Generate shareable or downloadable logo URLs
+- Visual reference for all symbols, colors, and types
 
-- A modern web browser (Chrome, Firefox, Edge, Safari)
-- A local web server (optional for local development)
+## 🚀 How to Use
 
-### Installation
+1. Go to the [Logo Builder page](https://juniorafonso.github.io/AlbionGuildLogoBuilder/index.html)
+2. Choose your symbol, pattern, colors, and frame
+3. Adjust scale, position, gems, and size as needed
+4. Preview your logo and copy the generated link to use anywhere
 
-1. Clone the repository or download the files
+## 📁 Project Structure
+
+- `index.html` — Main builder page
+- `parameters.html` — Reference for parameters, symbols, and colors
+- `styles.css` — Visual styles
+- `script.js` — Builder logic
+- `albion_guild_logos/` — Symbol images
+- `albion_logo_schema_variations/` — Pattern variations
+- `albion_logo_type_variations/` — Frame variations
+
+## 👨‍💻 Local Development
+
+1. Clone the repository:
+   ```sh
+   git clone https://github.com/juniorafonso/AlbionGuildLogoBuilder.git
+   ```
+2. Open the folder in your editor or IDE
+3. To test locally, simply open `index.html` in your browser  
+   (or use a local server extension like Live Server in VS Code)
+
+## 📝 License
+
+This project is open-source. See the [repository](https://github.com/juniorafonso/AlbionGuildLogoBuilder) for details.
+
+---
+
+Made by [juniorafonso](https://github.com/juniorafonso) — not affiliated with Albion
