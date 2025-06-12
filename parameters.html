@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Albion Online Guild Logo Asset Reference</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Include navigation -->
+    <div id="nav-placeholder"></div>
+
+    <div class="container">
+        <h2>API Parameters Reference</h2>
+        <div class="api-params-section">
+            <table class="params-table">
+                <thead>
+                    <tr>
+                        <th>Parameter</th>
+                        <th>Description</th>
+                        <th>Default</th>
+                        <th>Min Value</th>
+                        <th>Max Value</th>
+                        <th>Required</th>
+                        <th>Restrictions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>symbol</td>
+                        <td>Guild logo symbol name (e.g., GUILDSYMBOL_001)</td>
+                        <td>None</td>
+                        <td>N/A</td>
+                        <td>N/A</td>
+                        <td>✓</td>
+                        <td>Must be a valid symbol name from the list</td>
+                    </tr>
+                    <tr>
+                        <td>schema</td>
+                        <td>Background pattern (SCHEMA_01 through SCHEMA_09)</td>
+                        <td>None</td>
+                        <td>N/A</td>
+                        <td>N/A</td>
+                        <td>✓</td>
+                        <td>Valid values: SCHEMA_01 to SCHEMA_09</td>
+                    </tr>
+                    <tr>
+                        <td>primarySchemaColor</td>
+                        <td>Main background color ID (visually Color 2 from in-game UI)</td>
+                        <td>None</td>
+                        <td>1</td>
+                        <td>14</td>
+                        <td>✓</td>
+                        <td><strong>Cannot be same as secondarySchemaColor</strong></td>
+                    </tr>
+                    <tr>
+                        <td>secondarySchemaColor</td>
+                        <td>Secondary background color ID (visually Color 1 from in-game UI)</td>
+                        <td>None</td>
+                        <td>1</td>
+                        <td>14</td>
+                        <td>✓</td>
+                        <td><strong>Cannot be same as primarySchemaColor</strong></td>
+                    </tr>
+                    <tr>
+                        <td>symbolColor</td>
+                        <td>Color ID for the guild symbol</td>
+                        <td>None</td>
+                        <td>1</td>
+                        <td>14</td>
+                        <td>✓</td>
+                        <td>Any valid color ID</td>
+                    </tr>
+                    <tr>
+                        <td>type</td>
+                        <td>Guild frame type (rank, alliance, etc.)</td>
+                        <td>ACTIVE_GUILD_UNRANKED</td>
+                        <td>N/A</td>
+                        <td>N/A</td>
+                        <td>✓</td>
+                        <td>Must be a valid type from the list</td>
+                    </tr>
+                    <tr>
+                        <td>size</td>
+                        <td>Image size in pixels</td>
+                        <td>200</td>
+                        <td>16</td>
+                        <td>512</td>
+                        <td></td>
+                        <td>Whole numbers only</td>
+                    </tr>
+                    <tr>
+                        <td>symbolScale</td>
+                        <td>Size scaling factor for the symbol</td>
+                        <td>1.0</td>
+                        <td>0.5</td>
+                        <td>1.5</td>
+                        <td></td>
+                        <td><strong>Must use increments of 0.05 (e.g., 0.8, 0.85, 0.9)</strong></td>
+                    </tr>
+                    <tr>
+                        <td>symbolOffsetY</td>
+                        <td>Vertical position adjustment of symbol</td>
+                        <td>0.0</td>
+                        <td>-0.5</td>
+                        <td>0.5</td>
+                        <td></td>
+                        <td><strong>Must use increments of 0.05 (e.g., -0.15, -0.1, -0.05)</strong></td>
+                    </tr>
+                    <tr>
+                        <td>gems</td>
+                        <td>Number of gems shown on frame (unbalanced)</td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>5</td>
+                        <td></td>
+                        <td>Only works on certain frame types (can appear unbalanced)</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="api-notes-section">
+            <h3>Important Notes:</h3>
+            <ul class="api-notes-list">
+                <li><strong>Primary and Secondary Colors:</strong> These colors cannot be the same. The API will return an error if they match.</li>
+                <li><strong>Symbol Scale and Offset:</strong> These values must be in increments of 0.05 (e.g., 0.85, 0.9, 0.95). Other values will be rounded.</li>
+                <li><strong>Parameter Order:</strong> The order of parameters in the URL does not matter.</li>
+                <li><strong>Missing Parameters:</strong> Omitting optional parameters will use their default values.</li>
+                <li><strong>Type Parameter:</strong> This affects the frame around the logo and can show/hide gems depending on the guild rank.</li>
+            </ul>
+        </div>
+
+        <h2>API Base URL</h2>
+        <div class="api-url-section">
+            <code class="api-base-url">https://render.albiononline.com/v1/guild/logo.png?</code>
+            <p class="api-example">Example: <a href="https://render.albiononline.com/v1/guild/logo.png?symbol=GUILDSYMBOL_HONOR_N_GLORY&schema=SCHEMA_01&primarySchemaColor=1&secondarySchemaColor=2&symbolColor=8&type=ACTIVE_GUILD_GOLD&size=200" target="_blank">Basic Logo</a></p>
+        </div>
+
+        <h2>Available Guild Logos</h2>
+        <div class="logo-container">
+            <script>
+                const localLogosFolder = "albion_guild_logos";
+                function addLogoItem(symbolName) {
+                    const localImageUrl = `${localLogosFolder}/${symbolName}.png`;
+                    document.write(
+                        `<div class="logo-item"><img src="${localImageUrl}" alt="${symbolName}" class="logo-image"><p class="logo-name">${symbolName}</p></div>`
+                    );
+                }
+                for (let i = 1; i <= 67; i++) { addLogoItem(`GUILDSYMBOL_${String(i).padStart(3, '0')}`); }
+                const extraSymbols = ["GUILDSYMBOL_VENDETTA", "GUILDSYMBOL_INSANE_EMPIRE", "GUILDSYMBOL_HAMMER_AND_SICKLE", "GUILDSYMBOL_GOON", "GUILDSYMBOL_WAR_LEGEND", "GUILDSYMBOL_FINSTACK", "GUILDSYMBOL_GENTLEMEN", "GUILDSYMBOL_HONOR_N_GLORY", "GUILDSYMBOL_NILFGAARD", "GUILDSYMBOL_WILDWEST", "GUILDSYMBOL_CONFLICT", "GUILDSYMBOL_CZECO", "GUILDSYMBOL_FURIA", "GUILDSYMBOL_HELMET", "GUILDSYMBOL_INFINITE", "GUILDSYMBOL_RUSSIAN_BEARS", "GUILDSYMBOL_ZERATOR", "GUILDSYMBOL_ZORN", "GUILDSYMBOL_MONEYGUILD", "GUILDSYMBOL_DEATH", "GUILDSYMBOL_EOS", "GUILDSYMBOL_KOTD", "GUILDSYMBOL_SAY_MY_NAME", "GUILDSYMBOL_TRIDRA", "GUILDSYMBOL_AD_HONORES", "GUILDSYMBOL_BLAM", "GUILDSYMBOL_WOLF", "GUILDSYMBOL_HAMMERS", "GUILDSYMBOL_HOOD_AND_SCYTHE", "GUILDSYMBOL_ELEPHANT", "GUILDSYMBOL_MASK", "GUILDSYMBOL_EAGLE", "GUILDSYMBOL_DRAGON", "GUILDSYMBOL_CAT", "GUILDSYMBOL_RED_ARMY", "GUILDSYMBOL_ENVYBLACKONWHITE", "GUILDSYMBOL_ROCKET_BEANS", "GUILDSYMBOL_SCOIA_TAEL", "GUILDSYMBOL_SMURFING_MONKEYS", "GUILDSYMBOL_SEX_AND_FLEX", "GUILDSYMBOL_ESCALATION"];
+                extraSymbols.forEach(addLogoItem);
+            </script>
+        </div>
+        
+        <h2>Type Variations for GUILDSYMBOL_SEX_AND_FLEX</h2>
+        <div class="logo-type-container">
+            <script>
+                const localTypeVariationsFolder = "albion_logo_type_variations";
+                const symbolForLocalTypeVariations = "GUILDSYMBOL_SEX_AND_FLEX";
+                const logoTypeParametersList = ["ACTIVE_ALLIANCE", "ACTIVE_GUILD_CRYSTAL", "ACTIVE_GUILD_CRYSTAL_LEADER", "ACTIVE_GUILD_GOLD", "ACTIVE_GUILD_GOLD_LEADER", "ACTIVE_GUILD_SILVER", "ACTIVE_GUILD_SILVER_LEADER", "ACTIVE_GUILD_BRONZE", "ACTIVE_GUILD_BRONZE_LEADER", "ACTIVE_GUILD_IRON", "ACTIVE_GUILD_IRON_LEADER", "ACTIVE_GUILD_UNRANKED", "PASSIVE_ALLIANCE", "PASSIVE_GUILD_CRYSTAL", "PASSIVE_GUILD_GOLD", "PASSIVE_GUILD_SILVER", "PASSIVE_GUILD_BRONZE", "PASSIVE_GUILD_IRON", "PASSIVE_GUILD_UNRANKED"];
+                logoTypeParametersList.forEach(typeName => {
+                    const localImageUrl = `${localTypeVariationsFolder}/${symbolForLocalTypeVariations}_TYPE_${typeName}.png`;
+                    document.write(
+                        `<div class="logo-type-item"><img src="${localImageUrl}" alt="Logo ${symbolForLocalTypeVariations} with type ${typeName}" class="logo-type-image"><p class="logo-type-name">${typeName}</p></div>`
+                    );
+                });
+            </script>
+        </div>
+
+        <h2>Schema Variations for GUILDSYMBOL_SEX_AND_FLEX</h2>
+        <div class="logo-type-container">
+            <script>
+                const localSchemaVariationsFolder = "albion_logo_schema_variations";
+                const symbolForLocalSchemaVariations = "GUILDSYMBOL_SEX_AND_FLEX";
+                const schemaParametersList = ["SCHEMA_01", "SCHEMA_02", "SCHEMA_03", "SCHEMA_04", "SCHEMA_05", "SCHEMA_06", "SCHEMA_07", "SCHEMA_08", "SCHEMA_09"];
+                schemaParametersList.forEach(schemaName => {
+                    const localImageUrl = `${localSchemaVariationsFolder}/${symbolForLocalSchemaVariations}_SCHEMA_${schemaName}.png`;
+                    document.write(
+                        `<div class="logo-type-item"><img src="${localImageUrl}" alt="Logo ${symbolForLocalSchemaVariations} with schema ${schemaName}" class="logo-type-image"><p class="logo-type-name">${schemaName}</p></div>`
+                    );
+                });
+            </script>
+        </div>
+
+        <h2>Available Colors</h2>
+        <div class="color-list-container">
+            <script>
+                const colorList = [{ id: 1, r: 0, g: 0, b: 0, name: "Black" },{ id: 2, r: 255, g: 255, b: 255, name: "White" },{ id: 3, r: 44, g: 44, b: 42, name: "Dark Gray" },{ id: 4, r: 205, g: 191, b: 158, name: "Beige" },{ id: 5, r: 240, g: 181, b: 61, name: "Gold" },{ id: 6, r: 187, g: 90, b: 24, name: "Brown" },{ id: 7, r: 66, g: 41, b: 18, name: "Dark Brown" },{ id: 8, r: 148, g: 30, b: 27, name: "Red" },{ id: 9, r: 77, g: 19, b: 26, name: "Dark Red" },{ id: 10, r: 107, g: 44, b: 81, name: "Purple" },{ id: 11, r: 58, g: 32, b: 57, name: "Dark Purple" },{ id: 12, r: 50, g: 78, b: 103, name: "Blue" },{ id: 13, r: 67, g: 98, b: 45, name: "Green" },{ id: 14, r: 37, g: 60, b: 28, name: "Dark Green" }];
+                colorList.forEach(color => {
+                    const rgbColor = `rgb(${color.r}, ${color.g}, ${color.b})`;
+                    document.write(
+                        `<div class="color-item"><div class="color-swatch" style="background-color: ${rgbColor};"></div><p class="color-id">ID: ${color.id} (${color.name})</p></div>`
+                    );
+                });
+            </script>
+        </div>
+    </div>
+    
+    <script>
+    // Load navigation
+    fetch('nav.html')
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById('nav-placeholder').innerHTML = data;
+            // Highlight active nav link
+            document.getElementById('nav-reference').classList.add('active');
+        });
+    </script>
+</body>
+</html>

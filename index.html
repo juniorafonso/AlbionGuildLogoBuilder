@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Albion Online Guild Logo Builder</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Include navigation -->
+    <div id="nav-placeholder"></div>
+    
+    <div class="container">
+        <h2>Interactive Logo Builder</h2>
+        <div class="logo-builder-container">
+            <div class="controls-panel">
+                <!-- Pattern and Pattern Color in same row -->
+                <div class="row-group">
+                    <div class="control-section pattern-section">
+                        <label>Pattern</label>
+                        <div id="builder-schema-selector" class="visual-selector-container horizontal-scroll"></div>
+                    </div>
+                    <div class="control-section colors-section">
+                        <label>Pattern Colors</label>
+                        <div class="color-buttons-row">
+                            <div class="color-button-container">
+                                <span class="color-label">Color 1</span>
+                                <button id="pattern-color1-button" class="color-picker-button small">
+                                    <div class="color-preview"></div>
+                                </button>
+                                <div id="pattern-color1-popup" class="color-popup"></div>
+                            </div>
+                            <div class="color-button-container">
+                                <span class="color-label">Color 2</span>
+                                <button id="pattern-color2-button" class="color-picker-button small">
+                                    <div class="color-preview"></div>
+                                </button>
+                                <div id="pattern-color2-popup" class="color-popup"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Symbol and Symbol Color in same row -->
+                <div class="row-group">
+                    <div class="control-section pattern-section">
+                        <label>Symbol</label>
+                        <div id="builder-symbol-selector" class="visual-selector-container horizontal-scroll"></div>
+                    </div>
+                    <div class="control-section colors-section">
+                        <label>Symbol Color</label>
+                        <div class="color-buttons-row">
+                            <div class="color-button-container">
+                                <span class="color-label">Color</span>
+                                <button id="symbol-color-button" class="color-picker-button small">
+                                    <div class="color-preview"></div>
+                                </button>
+                                <div id="symbol-color-popup" class="color-popup"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Symbol Settings in same row -->
+                <div class="control-section">
+                    <label>Symbol Settings</label>
+                    <div class="settings-row">
+                        <div class="number-control">
+                            <span class="setting-label">Scale:</span>
+                            <div class="custom-number-input">
+                                <button type="button" id="builder-symbolScale-decrement">-</button>
+                                <span id="builder-symbolScale-display">1.00</span>
+                                <button type="button" id="builder-symbolScale-increment">+</button>
+                            </div>
+                        </div>
+                        <div class="number-control">
+                            <span class="setting-label">Height:</span>
+                            <div class="custom-number-input">
+                                <button type="button" id="builder-symbolOffsetY-decrement">-</button>
+                                <span id="builder-symbolOffsetY-display">0.00</span>
+                                <button type="button" id="builder-symbolOffsetY-increment">+</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Frame Type Selector -->
+                <div class="control-section">
+                    <label>Frame Type</label>
+                    <div id="builder-type-selector" class="visual-selector-container horizontal-scroll"></div>
+                </div>
+
+                <!-- Gems and Size side by side -->
+                <div class="control-section">
+                    <label>Additional Settings</label>
+                    <div class="settings-row">
+                        <div class="number-control">
+                            <span class="setting-label">Gems: <span class="warning">(Unbalanced in API!)</span></span>
+                            <div class="custom-number-input">
+                                <button type="button" id="builder-gems-decrement">-</button>
+                                <span id="builder-gems-display">0</span>
+                                <button type="button" id="builder-gems-increment">+</button>
+                            </div>
+                        </div>
+                        <div class="number-control">
+                            <span class="setting-label">Size (px):</span>
+                            <div class="custom-number-input">
+                                <button type="button" id="builder-size-decrement">-</button>
+                                <span id="builder-size-display">200</span>
+                                <button type="button" id="builder-size-increment">+</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="preview-panel">
+                <h3>Preview</h3>
+                <div class="preview-image-container">
+                    <img id="logo-preview-image" src="" alt="Logo Preview">
+                </div>
+                <div id="generated-url-container">
+                    <label for="generated-url">Generated URL:</label>
+                    <textarea id="generated-url" rows="3" readonly></textarea>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+    // Color data needed by script.js
+    const colorList = [
+        { id: 1, r: 0, g: 0, b: 0, name: "Black" },
+        { id: 2, r: 255, g: 255, b: 255, name: "White" },
+        { id: 3, r: 44, g: 44, b: 42, name: "Dark Gray" },
+        { id: 4, r: 205, g: 191, b: 158, name: "Beige" },
+        { id: 5, r: 240, g: 181, b: 61, name: "Gold" },
+        { id: 6, r: 187, g: 90, b: 24, name: "Brown" },
+        { id: 7, r: 66, g: 41, b: 18, name: "Dark Brown" },
+        { id: 8, r: 148, g: 30, b: 27, name: "Red" },
+        { id: 9, r: 77, g: 19, b: 26, name: "Dark Red" },
+        { id: 10, r: 107, g: 44, b: 81, name: "Purple" },
+        { id: 11, r: 58, g: 32, b: 57, name: "Dark Purple" },
+        { id: 12, r: 50, g: 78, b: 103, name: "Blue" },
+        { id: 13, r: 67, g: 98, b: 45, name: "Green" },
+        { id: 14, r: 37, g: 60, b: 28, name: "Dark Green" }
+    ];
+    </script>
+    <script defer src="script.js"></script>
+    <script>
+    // Load navigation
+    fetch('nav.html')
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById('nav-placeholder').innerHTML = data;
+            // Highlight active nav link
+            document.getElementById('nav-builder').classList.add('active');
+        });
+    </script>
+</body>
+</html>
